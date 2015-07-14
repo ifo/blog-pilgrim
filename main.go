@@ -34,5 +34,14 @@ func main() {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "GET" {
+		http.Error(w, "GET used to it.", http.StatusMethodNotAllowed)
+		return
+	}
+	if r.URL.Path != "/" {
+		http.Error(w, "What do I do?!", http.StatusNotFound)
+		return
+	}
+
 	indexTemplate.Execute(w, nil)
 }
